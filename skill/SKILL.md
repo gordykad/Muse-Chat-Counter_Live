@@ -8,6 +8,16 @@ opening it. If you run a rotation rule ("at N tokens a message, hand over
 to a successor"), this ticker and that rule consume the SAME read: the
 ticker shows the number, the rotation acts on it.
 
+## Scope — every chat, including new ones
+
+Run the ticker on **every active chat**, not just the one you first set
+it up in. Every **new** chat self-enrolls on its **first turn** using the
+enabling steps below — and if you create chats on your user's behalf,
+put enrollment in the first instruction you send the new chat. Because
+only an agent inside a chat can read that chat's prompt size, enrollment
+is always self-enrollment: one chat cannot stamp another. A chat with no
+state file under `~/hooks/state/` is unenrolled — enroll it on sight.
+
 ## The value
 
 - **Source:** `muse.session_status` → `context.estimated_prompt_tokens`.
@@ -123,3 +133,5 @@ than none.
 - v1: two layers (in-turn refresh + 10-minute wake-on-drift hook),
   `include_in_prompt: true`. Generalized from a production setup where it
   runs alongside a 250K rotation rule.
+- v2: scope — every active chat enrolls; every new chat self-enrolls on
+  its first turn.

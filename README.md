@@ -49,10 +49,12 @@ re-stamp it themselves.
      skill.yaml      (include_in_prompt: true — the skill rides every chat)
    ```
 
-2. In the chat you want to track, have your agent enable the ticker
+2. In each chat you want to track, have your agent enable the ticker
    (the SKILL.md has the exact 4-step procedure): it writes the state file,
    installs the hook from `templates/hook-script.sh`, and renames the chat
-   to its first stamp.
+   to its first stamp. The intended scope is **every active chat**, with
+   every new chat self-enrolling on its first turn — see the Scope
+   section of `skill/SKILL.md`.
 
 3. Adapt the knobs: poll interval, the worker prompt
    (`templates/worker-prompt.md`), and the escalation threshold in the
