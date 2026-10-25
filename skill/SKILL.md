@@ -41,6 +41,16 @@ the read:
 3. Set `stamped_value` = `value` in the state file. Title and state now
    agree, so the loop stays silent.
 
+**Stamp twice — start AND end of turn.** The start-of-turn read cannot
+see the current turn's own growth (tool outputs, long replies), so a
+title stamped only at turn start always trails the real size by one
+full turn's growth — on a heavy turn that gap ran to ~7K tokens and
+read to the user as "broken again." So: after all other tool work in
+the turn, take a SECOND `session_status` read and re-stamp (state +
+rename) as the last tool actions before the final reply. The only
+growth left uncounted is the closing message itself (~1–2K). The title
+is then never more than one message stale.
+
 This rides turns that are already happening; it costs no extra model
 calls.
 
