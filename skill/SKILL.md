@@ -23,8 +23,14 @@ ticker shows the number, the rotation acts on it.
 
 ## Layer 1 — in-turn refresh (primary, exact, free)
 
-Whenever the agent in a ticker-enabled chat reads `muse.session_status`
-during a turn:
+**Mandatory, every turn:** in a ticker-enabled chat, the agent reads
+`muse.session_status` at the START of handling every user message and
+every handoff — not only when some other rule needs the number. This
+read is the ticker's only source; skipping it is the one failure mode
+that starves the whole system (in production this froze a title at its
+setup value across several busy turns while the loop correctly stayed
+silent — there was no drift between state and title to fix). On taking
+the read:
 
 1. Write the read to the chat's ticker state file:
    `~/hooks/state/chat-ticker-<chat_id>.json` with
