@@ -1,0 +1,5 @@
+name: "chat_title_token_ticker"
+title: "Chat Title Token Ticker"
+description: "Keep a chat's live per-message token count stamped at the end of its name in ~x format, refreshed from the exact session_status read, with a 10-minute wake-on-drift loop as backstop."
+category: "Work and knowledge"
+include_in_prompt: true
